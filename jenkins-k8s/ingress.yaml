@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1beta1","kind":"Ingress","metadata":{"annotations":{},"name":"jenkins-ingress","namespace":"jenkins"},"spec":{"rules":[{"host":"jenkins.calavelas.int","http":{"paths":[{"backend":{"serviceName":"jenkins-k8s-service","servicePort":80}}]}},{"host":"jenkins.calavelas.net","http":{"paths":[{"backend":{"serviceName":"jenkins-k8s-service","servicePort":80}}]}}]}}
+  creationTimestamp: "2021-06-29T05:14:50Z"
+  generation: 2
+  name: jenkins-ingress
+  namespace: jenkins
+  resourceVersion: "9475222"
+  uid: 89cb1077-5186-4aba-abce-150e37009a8b
+spec:
+  rules:
+  - host: jenkins.calavelas.int
+    http:
+      paths:
+      - backend:
+          service:
+            name: jenkins-k8s-service
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+  - host: jenkins.calavelas.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: jenkins-k8s-service
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.1.0.151
+    - ip: 10.1.0.152
+    - ip: 10.1.0.153
